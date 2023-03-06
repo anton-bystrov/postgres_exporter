@@ -569,6 +569,7 @@
         },
         {
             "description": "PostgreSQL's effective_cache_size variable tunes how much RAM you expect to be available for disk caching.  Generally adding Linux free+cached will give you a good idea.  This value is used by the query planner whether plans will fit in memory, and when defined too low, can lead to some plans rejecting certain indexes.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -652,6 +653,7 @@
         },
         {
             "description": "The setting wal_buffers defines how much memory is used for caching the write-ahead log entries. Generally this value is small (3% of shared_buffers value), but it may need to be modified for heavily loaded servers.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -2175,6 +2177,7 @@
             "decimals": 0,
             "editable": true,
             "error": false,
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "links": []
@@ -2327,6 +2330,7 @@
             "dashLength": 10,
             "dashes": false,
             "decimals": 2,
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "links": []
@@ -2437,6 +2441,7 @@
             "decimals": 2,
             "editable": true,
             "error": false,
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "links": []
@@ -2802,6 +2807,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
+            "datasource": "$datasource",            
             "decimals": 0,
             "description": "Based on pg_stat_database_conflicts view",
             "fieldConfig": {
@@ -3185,6 +3191,7 @@
             "panels": [
                 {
                     "description": "The parameter shows how long a system has been \u201cup\u201d and running without a shut down or restart.",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3262,6 +3269,7 @@
                 },
                 {
                     "description": "The system load is a measurement of the computational work the system is performing. Each running process either using or waiting for CPU resources adds 1 to the load.",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3419,6 +3427,7 @@
                 },
                 {
                     "description": "Percent of Memory Available\nNote: on Modern Linux Kernels amount of Memory Available for application is not the same as Free+Cached+Buffers",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3498,6 +3507,7 @@
                 },
                 {
                     "description": "RAM + SWAP",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3575,6 +3585,7 @@
                 },
                 {
                     "description": "Sum of disk space on all partitions. Note  it can be significantly over-reported in some installations",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3652,6 +3663,7 @@
                 },
                 {
                     "description": "Lowest percent of the disk space available",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {
@@ -3743,6 +3755,7 @@
                     "bars": false,
                     "dashLength": 10,
                     "dashes": false,
+                    "datasource": "$datasource",
                     "decimals": 2,
                     "description": "The CPU time is measured in clock ticks or seconds. It is useful to measure CPU time as a percentage of the CPU's capacity, which is called the CPU usage.",
                     "editable": true,
@@ -3873,6 +3886,7 @@
                     "bars": false,
                     "dashLength": 10,
                     "dashes": false,
+                    "datasource": "$datasource",
                     "decimals": 2,
                     "description": "When a system is running with maximum CPU utilization, the transmitting and receiving threads must all share the available CPU. This will cause data to be queued more frequently to cope with the lack of CPU. CPU Saturation may be measured as the length of a wait queue, or the time spent waiting on the queue.",
                     "editable": true,
@@ -4011,6 +4025,7 @@
                     "bars": false,
                     "dashLength": 10,
                     "dashes": false,
+                    "datasource": "$datasource",
                     "decimals": 2,
                     "description": "Disk I/O includes read or write or input/output operations involving a physical disk. It is the speed with which the data transfer takes place between the hard disk drive and RAM.\n\nSwap Activity is memory management that involves swapping sections of memory to and from physical storage.",
                     "editable": true,
@@ -4169,6 +4184,7 @@
                     "bars": false,
                     "dashLength": 10,
                     "dashes": false,
+                    "datasource": "$datasource",
                     "decimals": 2,
                     "description": "Network traffic refers to the amount of data moving across a network at a given point in time.",
                     "editable": true,

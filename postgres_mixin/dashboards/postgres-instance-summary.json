@@ -31,6 +31,7 @@
         },
         {
             "description": "Reports whether PMM Server can connect to the PostgreSQL instance.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -139,6 +140,7 @@
         },
         {
             "description": "Defines the amount of memory the database server uses for shared memory buffers.  Default is 128MB.  Guidance on tuning is 25% of RAM, but generally doesn't exceed 40%.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -221,6 +223,7 @@
         },
         {
             "description": "The parameter work_mem defines the amount of memory assigned for internal sort operations and hash tables before writing to temporary disk files.  The default is 4MB.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -303,6 +306,7 @@
         },
         {
             "description": "Whether autovacuum process is enabled or not.  Generally the solution is to vacuum more often, not less.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -398,6 +402,7 @@
         },
         {
             "description": "",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -480,6 +485,7 @@
         },
         {
             "description": "The maximum number of client connections allowed.  Change this value with care as there are some memory resources that are allocated on a per-client basis, so setting max_connections higher will generally increase overall PostgreSQL memory usage.",
+            "datasource": "$datasource",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -3330,11 +3336,12 @@
                             "refId": "A"
                         }
                     ],
-                    "title": "Load Average",
+                    "title": "Load Averages",
                     "type": "stat",
                 },
                 {
                     "description": "RAM (Random Access Memory) is the hardware in a computing device where the operating system, application programs and data in current use are kept so they can be quickly reached by the device's processor.",
+                    "datasource": "$datasource",
                     "fieldConfig": {
                         "defaults": {
                             "color": {

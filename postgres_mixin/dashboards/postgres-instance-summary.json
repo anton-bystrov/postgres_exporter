@@ -1,15 +1,6 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-   "__requires": [ ],
+  "__inputs": [],
+   "__requires": [],
    "annotations": {
       "list": [ ]
    },
@@ -39,10 +30,6 @@
             "type": "text"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "Reports whether PMM Server can connect to the PostgreSQL instance.",
             "fieldConfig": {
                 "defaults": {
@@ -121,10 +108,6 @@
             "pluginVersion": "8.3.5",
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance) (pg_up{instance=~\"$instance\"})",
                     "format": "time_series",
                     "interval": "$interval",
@@ -137,10 +120,6 @@
             "type": "stat"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "The version of the PostgreSQL instance.",
             "gridPos": {
                 "h": 3,
@@ -159,10 +138,6 @@
             "type": "text"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "Defines the amount of memory the database server uses for shared memory buffers.  Default is 128MB.  Guidance on tuning is 25% of RAM, but generally doesn't exceed 40%.",
             "fieldConfig": {
                 "defaults": {
@@ -234,10 +209,6 @@
             "pluginVersion": "8.3.5",
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance) (max_over_time(pg_settings_shared_buffers_bytes{instance=~\"$instance\"}[$interval]) or\nmax_over_time(pg_settings_shared_buffers_bytes{instance=~\"$instance\"}[5m])) ",
                     "format": "time_series",
                     "interval": "$interval",
@@ -249,10 +220,6 @@
             "type": "stat"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "The parameter work_mem defines the amount of memory assigned for internal sort operations and hash tables before writing to temporary disk files.  The default is 4MB.",
             "fieldConfig": {
                 "defaults": {
@@ -324,10 +291,6 @@
             "pluginVersion": "8.3.5",
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance) (max_over_time(pg_settings_work_mem_bytes{instance=~\"$instance\"}[$interval]) or\nmax_over_time(pg_settings_work_mem_bytes{instance=~\"$instance\"}[5m]))",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -339,10 +302,6 @@
             "type": "stat"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "Whether autovacuum process is enabled or not.  Generally the solution is to vacuum more often, not less.",
             "fieldConfig": {
                 "defaults": {
@@ -427,10 +386,6 @@
             "pluginVersion": "8.3.5",
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance) (max_over_time(pg_settings_autovacuum{instance=~\"$instance\"}[$interval]) or\nmax_over_time(pg_settings_autovacuum{instance=~\"$instance\"}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
@@ -442,10 +397,6 @@
             "type": "stat"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "description": "",
             "fieldConfig": {
                 "defaults": {
@@ -514,10 +465,6 @@
             "pluginVersion": "8.3.5",
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "exemplar": false,
                     "expr": "avg by (instance) (pg_postmaster_uptime_seconds{instance=~\"$instance\"})",
                     "format": "time_series",
@@ -821,16 +768,13 @@
             "type": "row"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
             "aliasColors": {
                 "Total ": "#bf1b00"
             },
             "bars": false,
             "dashLength": 10,
             "dashes": false,
+            "datasource": "$datasource",
             "decimals": 0,
             "fieldConfig": {
                 "defaults": {
@@ -886,10 +830,6 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance,state) (sum(max_over_time(pg_stat_activity_count{instance=~\"$instance\",datname=~\"$database\"}[$interval]) or\nmax_over_time(pg_stat_activity_count{instance=~\"$instance\",datname=~\"$database\"}[5m])) by (state))",
                     "format": "time_series",
                     "hide": false,
@@ -949,10 +889,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
+            "datasource": "$datasource",
             "decimals": 0,
             "fieldConfig": {
                 "defaults": {
@@ -1007,10 +944,6 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "${DS_PROMETHEUS}"
-                    },
                     "expr": "avg by (instance,datname) (max_over_time(pg_stat_activity_count{instance=~\"$instance\",datname=~\"$database\",state='active'}[$interval]) or\nmax_over_time(pg_stat_activity_count{instance=~\"$instance\",datname=~\"$database\",state='active'}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
@@ -4664,7 +4597,7 @@
               "includeAll": false,
               "label": "Datasource",
               "multi": false,
-              "name": "DS_PROMETHEUS",
+              "name": "datasource",
               "options": [],
               "query": "prometheus",
               "refresh": 1,
@@ -4678,10 +4611,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_work_mem_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4704,10 +4634,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(pg_up{instance=~\"$instance\"},node_name)",
                 "hide": 2,
                 "includeAll": false,
@@ -4731,10 +4658,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(pg_up, instance)",
                 "hide": 0,
                 "includeAll": false,
@@ -4759,10 +4683,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(pg_stat_database_tup_fetched{instance=~\"$instance\",datname!~\"template.*|postgres\"},datname)",
                 "hide": 0,
                 "includeAll": true,
@@ -4786,10 +4707,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(pg_static{instance=~\"$instance\"},version)",
                 "hide": 2,
                 "includeAll": false,
@@ -4812,10 +4730,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_connections{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4838,10 +4753,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_shared_buffers_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4864,10 +4776,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_wal_buffers_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4890,10 +4799,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_wal_segment_size_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4916,10 +4822,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_maintenance_work_mem_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4942,10 +4845,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_block_size{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4969,10 +4869,7 @@
                     "text": "None",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_checkpoint_segments{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -4995,10 +4892,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_checkpoint_timeout_seconds{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5021,10 +4915,7 @@
                     "text": "1",
                     "value": "1"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_fsync{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5047,10 +4938,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_default_statistics_target{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5073,10 +4961,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_seq_page_cost{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5099,10 +4984,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_random_page_cost{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5125,10 +5007,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_effective_cache_size_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5151,10 +5030,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_effective_io_concurrency{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5177,10 +5053,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5203,10 +5076,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_analyze_scale_factor{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5229,10 +5099,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_analyze_threshold{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5255,10 +5122,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_vacuum_scale_factor{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5281,10 +5145,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_vacuum_threshold{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5307,10 +5168,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_vacuum_cost_limit{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5333,10 +5191,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_vacuum_cost_delay_seconds{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5359,10 +5214,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_max_workers{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5385,10 +5237,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_naptime_seconds{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5411,10 +5260,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_freeze_max_age{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5437,10 +5283,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_logging_collector{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5463,10 +5306,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_log_min_duration_statement_seconds{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5489,10 +5329,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_log_duration{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5515,10 +5352,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_log_lock_waits{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5541,10 +5375,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_wal_senders{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5567,10 +5398,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_wal_size_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5593,10 +5421,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_min_wal_size_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5619,10 +5444,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_wal_compression{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5645,10 +5467,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_worker_processes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5671,10 +5490,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_parallel_workers_per_gather{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5697,10 +5513,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_max_parallel_workers_per_gather{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5723,10 +5536,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_work_mem_bytes{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5749,10 +5559,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "query_result(pg_settings_autovacuum_multixact_freeze_max_age{instance=~\"$instance\"})",
                 "hide": 2,
                 "includeAll": false,
@@ -5776,10 +5583,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, environment)",
                 "hide": 2,
                 "includeAll": true,
@@ -5806,10 +5610,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, cluster)",
                 "hide": 2,
                 "includeAll": true,
@@ -5836,10 +5637,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, replication_set)",
                 "hide": 2,
                 "includeAll": true,
@@ -5866,10 +5664,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, node_type)",
                 "hide": 2,
                 "includeAll": true,
@@ -5896,10 +5691,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, service_type)",
                 "hide": 2,
                 "includeAll": true,
@@ -5926,10 +5718,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(mysql_info_schema_user_statistics_connected_time_seconds_total{instance=\"$instance\"},user)",
                 "hide": 2,
                 "includeAll": true,
@@ -5953,10 +5742,7 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values({__name__=~\"pg_up|mysql_up|mongodb_up|proxysql_mysql_status_active_transactions\"}, schema)",
                 "hide": 2,
                 "includeAll": true,
@@ -5983,10 +5769,7 @@
                     "text": "",
                     "value": ""
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
+                "datasource": "$datasource",
                 "definition": "label_values(pg_up{instance=\"$instance\"}, service_id)",
                 "hide": 2,
                 "includeAll": false,
